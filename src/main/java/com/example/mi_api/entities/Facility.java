@@ -11,7 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
 @Entity
-@Table(name = "facilities")
+@Table(name = "Facilities")
 
 public class Facility {
     public Facility() {
@@ -20,7 +20,7 @@ public class Facility {
     public enum Type {
         padel, tenis, futbol
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "facility_id")
@@ -74,5 +74,5 @@ public class Facility {
     public void setIs_active(Boolean is_active) {
         this.is_active = is_active;
     }
-    
+
 }
