@@ -15,7 +15,7 @@ import com.example.mi_api.entities.Comment;
 import com.example.mi_api.repository.CommentRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class CommentController {
 
     private final CommentRepository commentRepository;

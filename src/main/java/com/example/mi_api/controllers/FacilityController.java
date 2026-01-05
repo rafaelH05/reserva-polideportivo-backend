@@ -17,7 +17,7 @@ import com.example.mi_api.entities.Facility;
 import com.example.mi_api.repository.FacilityRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class FacilityController {
     public FacilityRepository facilityRepository;
 
