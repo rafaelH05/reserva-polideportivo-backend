@@ -46,11 +46,7 @@ public class securityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        configuration.setAllowedOrigins(Arrays.asList(
-            "https://reservas-villaverde.duckdns.org", 
-            "http://localhost:4200"
-        ));
+        configuration.addAllowedOriginPattern("*"); 
         
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
@@ -61,3 +57,4 @@ public class securityConfig {
         return source;
     }
 }
+
