@@ -50,6 +50,7 @@ jobs:
             sudo docker run -d \
               -p 8080:8080 \
               --name reserva-back \
+              --network red-interna \
               -e DB_HOST=${{ secrets.RDS_ENDPOINT }} \
               -e DB_PORT=3306 \
               -e DB_NAME=reservas \
