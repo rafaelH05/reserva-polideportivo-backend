@@ -52,7 +52,7 @@ jobs:
               --name reserva-back \
               -e DB_HOST=${{ secrets.RDS_ENDPOINT }} \
               -e DB_PORT=3306 \
-              -e DB_NAME=polideportivo_db \
+              -e DB_NAME=reservas \
               -e DB_USER=${{ secrets.RDS_USERNAME }} \
               -e DB_PASSWORD=${{ secrets.RDS_PASSWORD }} \
               ${{ secrets.DOCKER_USERNAME }}/reserva-back:latest
