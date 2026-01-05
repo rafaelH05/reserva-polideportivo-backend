@@ -6,19 +6,14 @@ import com.example.mi_api.repository.BookingRepository;
 
 import java.util.List;
 import com.example.mi_api.entities.Booking;
-import com.example.mi_api.entities.Comment;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@CrossOrigin(origins = "*")
 
 public class BookingController {
 

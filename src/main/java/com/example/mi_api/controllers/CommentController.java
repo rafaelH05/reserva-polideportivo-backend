@@ -2,7 +2,6 @@ package com.example.mi_api.controllers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ import com.example.mi_api.entities.Comment;
 import com.example.mi_api.repository.CommentRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class CommentController {
 
     private final CommentRepository commentRepository;

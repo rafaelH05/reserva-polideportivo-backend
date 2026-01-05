@@ -2,9 +2,6 @@ package com.example.mi_api.controllers;
 
 import java.util.List;
 
-import org.hibernate.sql.Update;
-import org.springframework.security.access.method.P;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +14,6 @@ import com.example.mi_api.entities.Facility;
 import com.example.mi_api.repository.FacilityRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class FacilityController {
     public FacilityRepository facilityRepository;
 
