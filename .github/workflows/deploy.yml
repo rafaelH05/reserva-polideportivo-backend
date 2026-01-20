@@ -26,7 +26,7 @@ jobs:
               -p 8080:8080 \
               --name reserva-back \
               --network red-interna \
-              -e DB_HOST="{{db_host}}" \
+              -e DB_HOST=${{ github.event.client_payload.db_host_rds }} \
               -e DB_PORT=3306 \
               -e DB_NAME=reservas \
               -e DB_USER=${{ secrets.RDS_USERNAME }} \
