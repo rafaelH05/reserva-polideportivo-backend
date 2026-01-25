@@ -2,6 +2,10 @@ name: deployment Docker
 
 on:
   workflow_dispatch:
+    inputs:
+      db_host_rds:
+        description: 'Endpoint de la RDS'
+        required: true
 jobs: 
   deploy:
     runs-on: ubuntu-latest
