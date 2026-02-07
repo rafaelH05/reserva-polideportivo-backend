@@ -24,7 +24,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
                         SELECT a.facility_id, a.start_time, a.end_time
                         FROM availabilities a
                         WHERE a.day_of_week = DAYNAME(CURDATE())
-                          AND a.start_time > CURTIME() -- 👈 Esta línea filtra horas pasadas
+                          AND a.start_time > CURTIME() 
                           AND NOT EXISTS (
                               SELECT 1
                               FROM bookings b
