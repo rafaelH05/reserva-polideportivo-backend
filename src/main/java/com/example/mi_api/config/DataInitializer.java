@@ -20,7 +20,11 @@ public class DataInitializer {
     CommandLineRunner initDatabase(FacilityRepository facilityRepository, 
                                    AvailabilityRepository availabilityRepository) {
         return args -> {
-           
+            // Evitar duplicados
+            if (facilityRepository.count() > 0) {
+                return 0;
+            }
+
             List<Facility> facilities = new ArrayList<>();
             facilities.add(crearFacility("Pista Pádel 1", "padel", true));
             facilities.add(crearFacility("Pista Pádel 2", "padel", true));
@@ -43,7 +47,7 @@ public class DataInitializer {
                         LocalTime endTime = startTime.plusMinutes(90);
 
                         Availability availability = new Availability();
-                        availability.setFacility(facility);da
+                        availability.setFacility(facility);
                         availability.setDayOfWeek(day);
                         availability.setStartTime(startTime);
                         availability.setEndTime(endTime);
