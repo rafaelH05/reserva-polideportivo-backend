@@ -22,7 +22,7 @@ public class DataInitializer {
         return args -> {
             // Evitar duplicados
             if (facilityRepository.count() > 0) {
-                return 0;
+                return;
             }
 
             List<Facility> facilities = new ArrayList<>();
@@ -68,7 +68,7 @@ public class DataInitializer {
         Facility f = new Facility();
         f.setName(name);
         f.setType(type);
-        f.setIsActive(isActive);
+        f.setActive(isActive);
         return f;
     }
 }
