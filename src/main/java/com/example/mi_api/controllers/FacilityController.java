@@ -42,7 +42,7 @@ public class FacilityController {
         if (facilityUpdate != null) {
             facilityUpdate.setName(facility.getName());
             facilityUpdate.setType(facility.getType());
-            facilityUpdate.setIs_active(facility.isActive());
+            facilityUpdate.setActive(facility.isActive());
             return facilityRepository.save(facilityUpdate);
         }
         return null;
