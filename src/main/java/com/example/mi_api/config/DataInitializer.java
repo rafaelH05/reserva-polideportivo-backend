@@ -16,9 +16,6 @@ import java.util.List;
 @Configuration
 public class DataInitializer {
 
-    public enum Type {
-        padel, tenis, futbol
-    }
 
     @Bean
     CommandLineRunner initDatabase(FacilityRepository facilityRepository, 
@@ -30,11 +27,11 @@ public class DataInitializer {
             }
 
             List<Facility> facilities = new ArrayList<>();
-            facilities.add(crearFacility("Pista Pádel 1", Type.padel, true));
-            facilities.add(crearFacility("Pista Pádel 2", Type.padel, true));
-            facilities.add(crearFacility("Pista Tenis 1", Type.tenis, true));
-            facilities.add(crearFacility("Pista Tenis 2", Type.tenis, true));
-            facilities.add(crearFacility("Campo de Fútbol", Type.futbol, true));
+            facilities.add(crearFacility("Pista Pádel 1", Facility.Type.padel, true));
+            facilities.add(crearFacility("Pista Pádel 2", Facility.Type.padel, true));
+            facilities.add(crearFacility("Pista Tenis 1", Facility.Type.tenis, true));
+            facilities.add(crearFacility("Pista Tenis 2", Facility.Type.tenis, true));
+            facilities.add(crearFacility("Campo de Fútbol", Facility.Type.futbol, true));
 
             List<Facility> savedFacilities = facilityRepository.saveAll(facilities);
 
