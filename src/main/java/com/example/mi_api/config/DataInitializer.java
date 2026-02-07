@@ -65,7 +65,7 @@ public class DataInitializer {
         };
     }
 
-    private Facility crearFacility(String name, Type type, boolean isActive) {
+    private Facility crearFacility(String name, Facility.Type type, boolean isActive) {
         Facility f = new Facility();
         f.setName(name);
         f.setType(type);
