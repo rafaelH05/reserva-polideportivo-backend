@@ -1,21 +1,10 @@
 package com.example.mi_api.entities;
 
-import jakarta.annotation.Generated;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Facilities")
-
 public class Facility {
-    public Facility() {
-    }
 
     public enum Type {
         padel, tenis, futbol
@@ -24,7 +13,7 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "facility_id")
-    private Integer facility_id;
+    private Integer id; 
 
     @Column(name = "name")
     private String name;
@@ -34,21 +23,23 @@ public class Facility {
     private Type type;
 
     @Column(name = "is_active")
-    private Boolean is_active;
+    private Boolean active; 
 
-    public Facility(Integer facility_id, String name, Type type, Boolean is_active) {
-        this.facility_id = facility_id;
+    public Facility() {
+    }
+
+    public Facility(String name, Type type, Boolean active) {
         this.name = name;
         this.type = type;
-        this.is_active = is_active;
+        this.active = active;
     }
 
-    public Integer getFacility_id() {
-        return facility_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFacility_id(Integer facility_id) {
-        this.facility_id = facility_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -67,12 +58,11 @@ public class Facility {
         this.type = type;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean isActive() {
+        return active;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
-
 }
