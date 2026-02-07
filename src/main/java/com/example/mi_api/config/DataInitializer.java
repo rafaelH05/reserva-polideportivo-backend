@@ -68,7 +68,7 @@ public class DataInitializer {
         Facility f = new Facility();
         f.setName(name);
         f.setType(type);
-        f.setActive(isActive);
+        f.setIs_active(isActive);
         return f;
     }
 }
