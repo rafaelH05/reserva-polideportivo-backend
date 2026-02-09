@@ -24,15 +24,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
                         SELECT a.facility_id, a.start_time, a.end_time
                         FROM availabilities a
                         WHERE a.day_of_week = DAYNAME(CURDATE())
-                          
-                          AND NOT EXISTS (
-                              SELECT 1
-                              FROM bookings b
-                              WHERE b.facility_id = a.facility_id
-                                AND DATE(b.start_time) = CURDATE()
-                                AND TIME(b.start_time) = a.start_time
-                                AND b.cancelled_at IS NULL
-                          )
                         """, nativeQuery = true)
         List<Object[]> findAvailableFacilitiesToday();
 
@@ -51,10 +42,15 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
                                 AND b.cancelled_at IS NULL
                           )
                           AND (
-                              :fecha > CURDATE()
-                              OR ( :fecha = CURDATE() AND a.start_time > CURTIME() )
+                              :fecha > :today
+                              OR ( :fecha = :today AND a.start_time > :now )
                           )
                         """, nativeQuery = true)
-        List<Object[]> findAvailableHoursByFacilityAndDate(Integer facilityId, String fecha);
+        List<Object[]> findAvailableHoursByFacilityAndDate(
+                        @Param("facilityId") Integer facilityId, 
+                        @Param("fecha") String fecha,
+                        @Param("today") LocalDate today, 
+                        @Param("now") LocalTime now      
+                    );
 
 }
