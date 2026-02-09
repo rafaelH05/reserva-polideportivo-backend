@@ -40,29 +40,31 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
       
         @Query(value = """
-                SELECT 
-                    a.facility_id, 
-                    DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
-                    a.end_time
-                FROM availabilities a
-                WHERE a.day_of_week = DAYNAME(:fecha)
-                  AND (
-                      :fecha > :today 
-                      OR (:fecha = :today AND a.start_time > :now)
-                  )
-                  AND NOT EXISTS (
-                      SELECT 1
-                      FROM bookings b
-                      WHERE b.facility_id = a.facility_id
-                        AND DATE(b.start_time) = :fecha
-                        AND TIME(b.start_time) = a.start_time
-                        AND b.cancelled_at IS NULL
-                  )
-                """, nativeQuery = true)
-        List<Object[]> findAvailableHoursByFacilityAndDate(
-            @Param("fecha") String fecha, 
-            @Param("today") String today, 
-            @Param("now") String now
-        );
+        SELECT 
+            a.facility_id, 
+            DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
+            a.end_time
+        FROM availabilities a
+        WHERE a.facility_id = :facilityId
+          AND a.day_of_week = DAYNAME(:fecha)
+          AND (
+              :fecha > :today 
+              OR (:fecha = :today AND a.start_time > :now)
+          )
+          AND NOT EXISTS (
+              SELECT 1
+              FROM bookings b
+              WHERE b.facility_id = a.facility_id
+                AND DATE(b.start_time) = :fecha
+                AND TIME(b.start_time) = a.start_time
+                AND b.cancelled_at IS NULL
+          )
+        """, nativeQuery = true)
+List<Object[]> findAvailableHoursByFacilityAndDate(
+        @Param("facilityId") Integer facilityId, 
+        @Param("fecha") String fecha, 
+        @Param("today") String today, 
+        @Param("now") String now
+    );
 
 }

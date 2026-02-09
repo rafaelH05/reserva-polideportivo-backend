@@ -73,7 +73,10 @@ public class BookingController {
 
     @GetMapping("/booking-available-hours/{facilityId}/{fecha}")
     public List<Object[]> bookingAvailableHours(@PathVariable Integer facilityId, @PathVariable String fecha) {
-        return bookingRepository.findAvailableHoursByFacilityAndDate(facilityId, fecha);
+        ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Madrid"));
+        String today = zdt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String now = zdt.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return bookingRepository.findAvailableHoursByFacilityAndDate(facilityId, fecha, today, now);
     }
     
 }
