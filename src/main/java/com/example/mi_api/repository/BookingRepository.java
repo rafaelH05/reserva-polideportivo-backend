@@ -28,11 +28,16 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
         List<Object[]> findAvailableFacilitiesToday();
 
         @Query(value = """
-                        SELECT
-                            DATE_FORMAT(a.start_time, '%H:%i') AS start_time
+                        SELECT 
+                            a.facility_id, 
+                            DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
+                            a.end_time
                         FROM availabilities a
-                        WHERE a.facility_id = :facilityId
-                          AND a.day_of_week = DAYNAME(:fecha)
+                        WHERE a.day_of_week = DAYNAME(:fecha)
+                          AND (
+                              :fecha > :today 
+                              OR (:fecha = :today AND a.start_time > :now)
+                          )
                           AND NOT EXISTS (
                               SELECT 1
                               FROM bookings b
@@ -41,16 +46,11 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
                                 AND TIME(b.start_time) = a.start_time
                                 AND b.cancelled_at IS NULL
                           )
-                          AND (
-                              :fecha > :today
-                              OR ( :fecha = :today AND a.start_time > :now )
-                          )
                         """, nativeQuery = true)
-        List<Object[]> findAvailableHoursByFacilityAndDate(
-                        @Param("facilityId") Integer facilityId, 
-                        @Param("fecha") String fecha,
-                        @Param("today") LocalDate today, 
-                        @Param("now") LocalTime now      
+        List<Object[]> findAvailableHours(
+                        @Param("fecha") String fecha, 
+                        @Param("today") String today, 
+                        @Param("now") String now
                     );
 
 }
