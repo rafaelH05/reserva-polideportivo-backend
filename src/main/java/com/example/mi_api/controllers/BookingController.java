@@ -73,7 +73,7 @@ public class BookingController {
     public List<Object[]> bookingToday() {
         ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Madrid"));
         String today = zdt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String now = zdt.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+        String now = zdt.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         return bookingRepository.findAvailableFacilitiesToday(today, now);
     }
 
