@@ -23,34 +23,46 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
         @Query(value = """
                         SELECT a.facility_id, a.start_time, a.end_time
                         FROM availabilities a
-                        WHERE a.day_of_week = DAYNAME(CURDATE())
-                        """, nativeQuery = true)
-        List<Object[]> findAvailableFacilitiesToday();
-
-        @Query(value = """
-                        SELECT 
-                            a.facility_id, 
-                            DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
-                            a.end_time
-                        FROM availabilities a
-                        WHERE a.day_of_week = DAYNAME(:fecha)
-                          AND (
-                              :fecha > :today 
-                              OR (:fecha = :today AND a.start_time > :now)
-                          )
+                        WHERE a.day_of_week = DAYNAME(:today)
+                          AND a.start_time > :now
                           AND NOT EXISTS (
-                              SELECT 1
-                              FROM bookings b
+                              SELECT 1 FROM bookings b
                               WHERE b.facility_id = a.facility_id
-                                AND DATE(b.start_time) = :fecha
+                                AND DATE(b.start_time) = :today
                                 AND TIME(b.start_time) = a.start_time
                                 AND b.cancelled_at IS NULL
                           )
                         """, nativeQuery = true)
+        List<Object[]> findAvailableFacilitiesToday(
+            @Param("today") String today, 
+            @Param("now") String now
+        );
+
+      
+        @Query(value = """
+                SELECT 
+                    a.facility_id, 
+                    DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
+                    a.end_time
+                FROM availabilities a
+                WHERE a.day_of_week = DAYNAME(:fecha)
+                  AND (
+                      :fecha > :today 
+                      OR (:fecha = :today AND a.start_time > :now)
+                  )
+                  AND NOT EXISTS (
+                      SELECT 1
+                      FROM bookings b
+                      WHERE b.facility_id = a.facility_id
+                        AND DATE(b.start_time) = :fecha
+                        AND TIME(b.start_time) = a.start_time
+                        AND b.cancelled_at IS NULL
+                  )
+                """, nativeQuery = true)
         List<Object[]> findAvailableHoursByFacilityAndDate(
-                        @Param("fecha") String fecha, 
-                        @Param("today") String today, 
-                        @Param("now") String now
-                    );
+            @Param("fecha") String fecha, 
+            @Param("today") String today, 
+            @Param("now") String now
+        );
 
 }
