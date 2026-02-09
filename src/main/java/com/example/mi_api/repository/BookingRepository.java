@@ -47,7 +47,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
                                 AND b.cancelled_at IS NULL
                           )
                         """, nativeQuery = true)
-        List<Object[]> findAvailableHours(
+        List<Object[]> findAvailableHoursByFacilityAndDate(
                         @Param("fecha") String fecha, 
                         @Param("today") String today, 
                         @Param("now") String now
