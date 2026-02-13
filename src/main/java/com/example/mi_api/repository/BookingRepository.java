@@ -42,9 +42,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
       
         @Query(value = """
         SELECT 
-            a.facility_id, 
             DATE_FORMAT(a.start_time, '%H:%i') AS start_time, 
-            a.end_time
         FROM availabilities a
         WHERE a.facility_id = :facilityId
           AND a.day_of_week = DAYNAME(:fecha)
